@@ -1,0 +1,75 @@
+import 'dart:io';  // Untuk input dan output di konsol
+
+// Fungsi konversi Celsius ke Fahrenheit
+double celsiusToFahrenheit(double celsius) {
+  return (celsius * 9 / 5) + 32;
+}
+
+// Fungsi konversi Fahrenheit ke Celsius
+double fahrenheitToCelsius(double fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9;
+}
+
+// Fungsi konversi Celsius ke Kelvin
+double celsiusToKelvin(double celsius) {
+  return celsius + 273.15;
+}
+
+// Fungsi konversi Kelvin ke Celsius
+double kelvinToCelsius(double kelvin) {
+  return kelvin - 273.15;
+}
+
+void main() {
+  print('Selamat datang di Program Konversi Suhu!');
+  print('Pilih jenis konversi:');
+  print('1. Celsius (°C) ke Fahrenheit (°F)');
+  print('2. Fahrenheit (°F) ke Celsius (°C)');
+  print('3. Celsius (°C) ke Kelvin (K)');
+  print('4. Kelvin (K) ke Celsius (°C)');
+  
+  stdout.write('Masukkan pilihan (1-4): ');
+  String? pilihanInput = stdin.readLineSync();
+  
+  // Input suhu
+  stdout.write('Masukkan nilai suhu: ');
+  String? suhuInput = stdin.readLineSync();
+  
+  // Konversi input ke double dengan penanganan error
+  double? suhu;
+  try {
+    suhu = double.parse(suhuInput ?? '');
+  } catch (e) {
+    print('Error: Input suhu harus berupa angka. Silakan coba lagi.');
+    return;  // Keluar dari program
+  }
+  
+  double hasil = 0.0;
+  String deskripsi = '';
+  
+  // Panggil fungsi berdasarkan pilihan
+  switch (pilihanInput) {
+    case '1':
+      hasil = celsiusToFahrenheit(suhu);
+      deskripsi = '${suhu}°C = ${hasil}°F';
+      break;
+    case '2':
+      hasil = fahrenheitToCelsius(suhu);
+      deskripsi = '${suhu}°F = ${hasil}°C';
+      break;
+    case '3':
+      hasil = celsiusToKelvin(suhu);
+      deskripsi = '${suhu}°C = ${hasil}K';
+      break;
+    case '4':
+      hasil = kelvinToCelsius(suhu);
+      deskripsi = '${suhu}K = ${hasil}°C';
+      break;
+    default:
+      print('Error: Pilihan tidak valid. Gunakan 1-4.');
+      return;  // Keluar dari program
+  }
+  
+  // Tampilkan hasil
+  print('Hasil konversi: $deskripsi');
+}
