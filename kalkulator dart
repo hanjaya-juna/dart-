@@ -1,0 +1,58 @@
+import 'dart:io';  // Untuk input dan output di konsol
+
+void main() {
+  print('Selamat datang di Kalkulator Sederhana!');
+  
+  // Input angka pertama
+  stdout.write('Masukkan angka pertama: ');
+  String? input1 = stdin.readLineSync();
+  
+  // Input operator
+  stdout.write('Masukkan operator (+, -, *, /): ');
+  String? operatorInput = stdin.readLineSync();
+  
+  // Input angka kedua
+  stdout.write('Masukkan angka kedua: ');
+  String? input2 = stdin.readLineSync();
+  
+  // Konversi input ke double (dengan penanganan error sederhana)
+  double? num1;
+  double? num2;
+  
+  try {
+    num1 = double.parse(input1 ?? '');  // ?? '' untuk menghindari null
+    num2 = double.parse(input2 ?? '');
+  } catch (e) {
+    print('Error: Input yang dimasukkan bukan angka. Silakan coba lagi.');
+    return;  // Keluar dari program
+  }
+  
+  double? result;
+  
+  // Lakukan operasi berdasarkan operator
+  switch (operatorInput) {
+    case '+':
+      result = num1 + num2;
+      break;
+    case '-':
+      result = num1 - num2;
+      break;                                                                               
+    case '*':
+      result = num1 * num2;
+      break;
+    case '/':
+      if (num2 != 0) {
+        result = num1 / num2;
+      } else {
+        print('Error: Pembagian dengan nol tidak diperbolehkan.');
+        return;  // Keluar dari program
+      }
+      break;
+    default:
+      print('Error: Operator tidak valid. Gunakan +, -, *, atau /.');
+      return;  // Keluar dari program
+  }
+  
+  // Tampilkan hasil
+  print('Hasil: $num1 $operatorInput $num2 = $result');
+}
