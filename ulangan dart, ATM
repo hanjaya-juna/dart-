@@ -1,0 +1,58 @@
+import 'dart:io';
+
+
+double cekSaldo({required double saldo}) {
+  print("Saldo anda saat ini: Rp${saldo.toStringAsFixed(0)}");
+  return saldo;
+}
+
+double setorTunai(double saldo, double jumlah) {
+  saldo += jumlah;
+  print("Setor tunai berhasil sebesar Rp${jumlah.toStringAsFixed(0)}");
+  print("Saldo anda sekarang: Rp${saldo.toStringAsFixed(0)}");
+  return saldo;
+}
+
+double tarikTunai(double saldo, double jumlah) {
+  if (jumlah <= saldo) {
+    saldo -= jumlah;
+    print("Penarikan tunai sebesar Rp${jumlah.toStringAsFixed(0)} berhasil.");
+    print("Sisa saldo anda: Rp${saldo.toStringAsFixed(0)}");
+  } else {
+    print("Saldo tidak cukup! Penarikan gagal.");
+  }
+  return saldo;
+}
+
+void main() {
+  double saldo = 500000; // saldo awal
+
+  while (true) {
+    print("\n===== MENU ATM SEDERHANA =====");
+    print("1. Cek Saldo");
+    print("2. Setor Tunai");
+    print("3. Tarik Tunai");
+    print("4. Keluar");
+    stdout.write("Pilih menu (1-4): ");
+    String? input = stdin.readLineSync();
+
+    if (input == '1') {
+      cekSaldo(saldo: saldo);
+    } else if (input == '2') {
+      stdout.write("Masukkan jumlah setor: ");
+      double jumlah = double.parse(stdin.readLineSync()!);
+      saldo = setorTunai(saldo, jumlah);
+    } else if (input == '3') {
+      stdout.write("Masukkan jumlah tarik: ");
+      double jumlah = double.parse(stdin.readLineSync()!);
+      saldo = tarikTunai(saldo, jumlah);
+    } else if (input == '4') {
+      print("Terima kasih telah menggunakan ATM ini!");
+      break;
+    } else {
+      print("Pilihan tidak valid, coba lagi!");
+    }
+  }
+}
+
+
